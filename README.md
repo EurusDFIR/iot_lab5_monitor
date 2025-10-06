@@ -197,6 +197,12 @@ python tests/comprehensive_test.py
 - **Git** (for version control)
 - **Internet connection** (for MQTT broker)
 
+### 0️⃣ **Clone Repository**
+```bash
+git clone https://github.com/EurusDFIR/iot_lab5_monitor.git
+cd iot_lab5_monitor
+```
+
 ### 1️⃣ **Setup Python Environment**
 ```bash
 # Create virtual environment
@@ -397,7 +403,10 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **MQTT.js** - JavaScript MQTT client library
 - **Thủ Dầu Một University (TDMU)** - Educational support
 
-**👨‍💻 Author:** Nguyễn Trung Kiệt  
+**👨‍💻 Author:** EurusDFIR  
+- GitHub: [@EurusDFIR](https://github.com/EurusDFIR)  
+- Repository: https://github.com/EurusDFIR/iot_lab5_monitor  
+- Based on: nguyentrungkiet/demo_chuong4_3_1 (fixed bugs and improvements)  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)  
 **📅 Year:** 2025
 
