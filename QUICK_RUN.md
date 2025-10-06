@@ -25,9 +25,15 @@ python -m http.server 3000
 ```
 Mở: http://localhost:3000
 
-**Terminal 2 - ESP32 Simulator (hoặc upload firmware lên hardware):**
+**Terminal 2 - Setup ESP32-C3 Hardware:**
 ```bash
-python simulators/esp32_simulator.py
+# 1. Mở Arduino IDE
+# 2. Mở file: firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino
+# 3. Sửa WiFi và MQTT config:
+#    const char *WIFI_SSID = "YOUR_WIFI_NAME";
+#    const char *WIFI_PASSWORD = "YOUR_WIFI_PASS";
+#    const char *MQTT_HOST = "YOUR_COMPUTER_IP";
+# 4. Upload lên ESP32-C3
 ```
 
 **Terminal 3 - Database Logger (tùy chọn):**
@@ -49,39 +55,70 @@ cd app_flutter
 flutter run
 ```
 
-## 🔧 Cấu hình Hardware (ESP32-C3)
+## 🔧 Setup ESP32-C3 Hardware
 
-Nếu có ESP32-C3 hardware:
+**Bắt buộc - không có hardware thì không chạy được!**
 
-1. Mở `firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino` trong Arduino IDE
-2. Sửa WiFi credentials:
-```cpp
-const char *WIFI_SSID = "YOUR_WIFI_NAME";
-const char *WIFI_PASSWORD = "YOUR_WIFI_PASS";
-const char *MQTT_HOST = "YOUR_COMPUTER_IP";  // IP của máy tính chạy Mosquitto
-```
-3. Upload lên ESP32-C3
+1. **Chuẩn bị Arduino IDE:**
+   - Tải Arduino IDE: https://www.arduino.cc/en/software
+   - Cài ESP32 board: File > Preferences > Additional Boards Manager URLs
+   - Thêm: `https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json`
+   - Tools > Board > Boards Manager > Tìm "esp32" > Cài "esp32 by Espressif"
+
+2. **Cấu hình WiFi và MQTT:**
+   - Mở file: `firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino`
+   - Sửa 3 thông tin quan trọng:
+   ```cpp
+   const char *WIFI_SSID = "YOUR_WIFI_NAME";        // Tên WiFi nhà bạn
+   const char *WIFI_PASSWORD = "YOUR_WIFI_PASS";    // Mật khẩu WiFi
+   const char *MQTT_HOST = "192.168.1.xxx";         // IP máy tính chạy Mosquitto
+   ```
+
+3. **Upload firmware:**
+   - Kết nối ESP32-C3 với máy tính
+   - Tools > Board > ESP32C3 Dev Module
+   - Tools > Port > Chọn COM port của ESP32
+   - Click Upload (mũi tên phải)
+   - Chờ "Done uploading"
+
+4. **Kiểm tra hoạt động:**
+   - Mở Serial Monitor (Tools > Serial Monitor)
+   - Thấy: "Connected to WiFi", "MQTT Connected", "Publishing sensor data"
 
 ## 📊 Kiểm tra hoạt động
 
-- **Web Dashboard:** http://localhost:3000 - hiển thị nhiệt độ, độ ẩm real-time
-- **Database:** Chạy `python database/view_database.py all` để xem dữ liệu
+- **ESP32 Hardware:** Serial Monitor hiển thị "Publishing sensor data" mỗi 2 giây
+- **Web Dashboard:** http://localhost:3000 - hiển thị nhiệt độ, độ ẩm real-time từ DHT11
+- **Database:** Chạy `python database/view_database.py all` để xem dữ liệu đã lưu
 - **MQTT Topics:** `demo/room1/sensor/state`, `demo/room1/device/state`
 
 ## 🛠️ Troubleshooting
 
-### Không kết nối được?
-- Kiểm tra Docker: `docker ps` (phải có mosquitto container)
-- Kiểm tra IP: ESP32 phải cùng mạng WiFi với máy tính
-- Android Emulator: Dùng `10.0.2.2` thay vì `localhost`
-
 ### ESP32 không kết nối WiFi?
-- ESP32 chỉ hỗ trợ WiFi 2.4GHz
-- Kiểm tra Serial Monitor trong Arduino IDE
+- **ESP32 chỉ hỗ trợ WiFi 2.4GHz** - không phải 5GHz
+- Kiểm tra tên WiFi và mật khẩu có đúng không
+- Mở Serial Monitor trong Arduino IDE xem lỗi gì
+- ESP32 và máy tính phải cùng mạng WiFi
 
-### Web không hiển thị dữ liệu?
-- Đảm bảo ESP32/Simulator đang chạy
+### ESP32 không kết nối MQTT?
+- Kiểm tra IP máy tính: `ipconfig` (Windows) hoặc `ifconfig` (Linux/Mac)
+- Đảm bảo Mosquitto container đang chạy: `docker ps`
+- Kiểm tra firewall không chặn port 1883
+
+### Web Dashboard không hiển thị dữ liệu?
+- Đảm bảo ESP32 đã kết nối và đang publish data
 - Kiểm tra Console Browser (F12) xem có lỗi WebSocket
+- Đảm bảo Mosquitto chạy trên port 8083 (WebSocket)
+
+### Flutter App không kết nối?
+- Android Emulator: Dùng IP `10.0.2.2` thay vì `localhost`
+- Physical device: Dùng IP thật của máy tính
+- Kiểm tra Mosquitto port 1883
+
+### Database không lưu dữ liệu?
+- Kiểm tra `mqtt_logger.py` đang chạy
+- Xem console có lỗi gì không
+- File `iot_data.db` sẽ tự tạo khi chạy
 
 ## 📋 Yêu cầu hệ thống
 
@@ -92,11 +129,13 @@ const char *MQTT_HOST = "YOUR_COMPUTER_IP";  // IP của máy tính chạy Mosqu
 
 ## 🎯 Tính năng
 
-✅ ESP32-C3 với DHT11, LED, Motor  
-✅ Web Dashboard real-time  
-✅ Flutter Mobile App  
-✅ SQLite Database logging  
-✅ Discord Temperature Alerts  
-✅ Multi-network support  
+✅ **ESP32-C3 Hardware** với DHT11 sensor, LED control, L298N motor  
+✅ **Real sensor data** - nhiệt độ, độ ẩm thực từ DHT11  
+✅ **Device control** - bật/tắt LED và motor qua MQTT  
+✅ **Web Dashboard** real-time monitoring  
+✅ **SQLite Database** logging tất cả dữ liệu  
+✅ **Discord Temperature Alerts** cảnh báo khi quá nhiệt  
+✅ **Flutter Mobile App** điều khiển từ xa  
+✅ **Multi-network support** - hoạt động trên mọi WiFi  
 
 **Repository:** https://github.com/EurusDFIR/iot_lab5_monitor
