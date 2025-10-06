@@ -27,34 +27,54 @@ SOFTWARE.
 This project uses the following open-source libraries:
 
 ### JavaScript Libraries
+
 - **MQTT.js** (MIT License) - MQTT client library for JavaScript
 - **Chart.js** (MIT License) - For data visualization (if used)
 
-### Python Libraries  
+### Python Libraries
+
 - **paho-mqtt** (Eclipse Public License 1.0) - Python MQTT client
 - **requests** (Apache 2.0) - HTTP library for Python
 
 ### Arduino Libraries
+
 - **PubSubClient** (MIT License) - MQTT library for Arduino/ESP32
 - **DHT sensor library** (MIT License) - Adafruit DHT sensor library
 - **BH1750** (MIT License) - BH1750 light sensor library
 - **ArduinoJson** (MIT License) - JSON library for Arduino
 
 ### Flutter Packages
+
 - **flutter** (BSD 3-Clause) - Google's UI toolkit
 - **material** (BSD 3-Clause) - Material Design components
 
 ### Assets & Resources
+
 - **Material Icons** (Apache 2.0) - Material Design icons
 - **Cupertino Icons** (MIT License) - iOS-style icons
+
+---
+
+## Original Work Attribution
+
+This project is a derivative work based on the original IoT demo system by nguyentrungkiet.
+The original repository can be found at: https://github.com/nguyentrungkiet/demo_chuong4_3_1
+
+Significant improvements and modifications have been made by EurusDFIR, including:
+- Hardware ESP32-C3 support with real sensors
+- SQLite database logging system
+- Discord temperature alert notifications
+- Multi-network configuration support
+- Comprehensive documentation and setup guides
 
 ---
 
 ## Acknowledgments
 
 Special thanks to:
+
 - **HiveMQ** for providing free public MQTT broker
-- **Espressif Systems** for ESP32-S3 development platform  
+- **Espressif Systems** for ESP32-S3 development platform
 - **Google** for Flutter framework
 - **Eclipse Foundation** for Mosquitto MQTT broker
 - **Arduino Community** for extensive library ecosystem
@@ -70,7 +90,7 @@ Special thanks to:
 
 ## Disclaimer
 
-This software is provided for educational and demonstration purposes only. 
+This software is provided for educational and demonstration purposes only.
 When working with hardware components and electrical connections:
 
 - Always follow proper safety procedures
@@ -80,7 +100,8 @@ When working with hardware components and electrical connections:
 - The authors assume no responsibility for any damages or injuries
 
 For production use, ensure proper security measures are implemented including:
+
 - TLS/SSL encryption for MQTT communications
-- Strong authentication mechanisms  
+- Strong authentication mechanisms
 - Network security configurations
 - Regular security updates and monitoring

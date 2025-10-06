@@ -19,6 +19,7 @@
 ## 📋 **Features**
 
 ### 🌐 **Web Dashboard (Real-time Monitoring)**
+
 - ✅ **Beautiful modern UI** với gradient design
 - ✅ **Real-time sensor data** (Temperature, Humidity, Light)
 - ✅ **Device status monitoring** (Online/Offline, Signal strength)
@@ -26,6 +27,7 @@
 - ✅ **MQTT WebSocket connection** cho real-time updates
 
 ### 📱 **Flutter Mobile App (Device Control)**
+
 - ✅ **Material Design 3** interface
 - ✅ **Device control switches** (Light & Fan toggle)
 - ✅ **Real-time synchronization** với Web Dashboard
@@ -33,6 +35,7 @@
 - ✅ **Cross-platform** (Web, Android, iOS ready)
 
 ### 🤖 **ESP32 Device Support**
+
 - ✅ **ESP32-S3 firmware** có sẵn
 - ✅ **Python simulator** cho testing
 - ✅ **MQTT communication** với broker
@@ -40,6 +43,7 @@
 - ✅ **Device control** (Relays, LEDs)
 
 ### 🔄 **MQTT Synchronization**
+
 - ✅ **HiveMQ Public Broker** support
 - ✅ **Real-time message routing**
 - ✅ **Command synchronization** giữa các clients
@@ -59,20 +63,20 @@ graph TB
             WEB[🌐 Web Dashboard<br/>localhost:3000<br/>Real-time Monitoring]
             APP[📱 Flutter Mobile App<br/>localhost:8080<br/>Device Control]
         end
-        
+
         subgraph "☁️ Communication Layer"
             BROKER[🔌 MQTT Broker<br/>HiveMQ Public<br/>broker.hivemq.com]
             WS1[WebSocket :8884]
             WS2[WebSocket :8884]
             TCP[TCP :1883]
         end
-        
+
         subgraph "🔧 Device Layer"
             ESP[🤖 ESP32-S3<br/>Real Hardware<br/>Sensors + Relays]
             SIM[🐍 Python Simulator<br/>Development Testing<br/>Mock Device]
         end
     end
-    
+
     WEB -.->|WebSocket| WS1
     APP -.->|WebSocket| WS2
     WS1 --> BROKER
@@ -80,7 +84,7 @@ graph TB
     ESP -->|MQTT TCP| TCP
     SIM -.->|MQTT TCP| TCP
     TCP --> BROKER
-    
+
     style WEB fill:#4A90E2,color:#fff
     style APP fill:#7ED321,color:#fff
     style BROKER fill:#F5A623,color:#fff
@@ -163,6 +167,7 @@ graph TB
 ## 🚀 **Quick Start**
 
 ### ⚡ **One-Click Launch**
+
 ```bash
 # Navigate to project directory
 cd d:\SourceCode\chapter4_3_1
@@ -172,10 +177,12 @@ cd d:\SourceCode\chapter4_3_1
 ```
 
 **🌐 Access URLs:**
+
 - **Web Dashboard:** http://localhost:3000/index.html
 - **Flutter App:** http://localhost:8080/index.html
 
 ### 🧪 **Test System**
+
 ```bash
 # Run comprehensive test
 python tests/comprehensive_test.py
@@ -192,18 +199,21 @@ python tests/comprehensive_test.py
 ## 🛠️ **Installation**
 
 ### 📋 **Requirements**
+
 - **Python 3.8+** (with pip)
 - **Flutter SDK 3.0+** (for mobile development)
 - **Git** (for version control)
 - **Internet connection** (for MQTT broker)
 
 ### 0️⃣ **Clone Repository**
+
 ```bash
 git clone https://github.com/EurusDFIR/iot_lab5_monitor.git
 cd iot_lab5_monitor
 ```
 
 ### 1️⃣ **Setup Python Environment**
+
 ```bash
 # Create virtual environment
 python -m venv .venv
@@ -216,6 +226,7 @@ pip install paho-mqtt requests
 ```
 
 ### 2️⃣ **Setup Flutter (Optional - for development)**
+
 ```bash
 # Download Flutter SDK từ https://flutter.dev/docs/get-started/install
 # Extract và add to PATH
@@ -229,6 +240,7 @@ flutter pub get
 ```
 
 ### 3️⃣ **Build & Run**
+
 ```bash
 # Build Flutter app
 .\scripts\build_flutter.bat
@@ -273,18 +285,21 @@ ESP32-S3 Pinout:
 ### ⚙️ **Configuration Steps**
 
 1. **WiFi Setup:** Update `firmware_esp32s3/src/main.cpp`
+
 ```cpp
 const char* ssid = "Your_WiFi_Name";
 const char* password = "Your_WiFi_Password";
 ```
 
 2. **MQTT Broker:** Default uses HiveMQ public broker
+
 ```cpp
 const char* mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 ```
 
 3. **Upload Firmware:** Using Arduino IDE or PlatformIO
+
 ```bash
 # Arduino IDE: Tools → Board → ESP32 → ESP32S3 Dev Module
 # Upload firmware to device
@@ -295,6 +310,7 @@ const int mqtt_port = 1883;
 ## 📈 **Performance & Monitoring**
 
 ### ⚡ **System Metrics**
+
 - **MQTT Throughput:** ~50 messages/minute
 - **Connection Latency:** <100ms
 - **Web Dashboard:** ~2MB bundle, <3s loading
@@ -302,6 +318,7 @@ const int mqtt_port = 1883;
 - **ESP32 Resource:** ~15MB RAM, <1% CPU
 
 ### 📊 **Health Checks**
+
 ```bash
 # System status
 .\scripts\check_status.bat
@@ -320,12 +337,14 @@ netstat -an | findstr ":3000\|:8080\|:1883"
 ### 🚨 **Common Issues**
 
 **Port Already in Use:**
+
 ```bash
 taskkill /f /im python.exe
 netstat -ano | findstr :3000
 ```
 
 **MQTT Connection Failed:**
+
 ```bash
 # Test MQTT connectivity
 python tests/test_mqtt_command.py
@@ -336,6 +355,7 @@ python tests/test_mqtt_command.py
 ```
 
 **Flutter Build Issues:**
+
 ```bash
 flutter clean
 flutter pub get
@@ -347,12 +367,14 @@ flutter build web
 ## 🚀 **Advanced Features**
 
 ### 🔧 **Custom MQTT Broker**
+
 ```bash
 # Docker Mosquitto setup
 docker run -it -p 1883:1883 eclipse-mosquitto
 ```
 
 ### 📊 **Database Integration**
+
 ```python
 # Add InfluxDB for time-series data
 from influxdb_client import InfluxDBClient
@@ -360,11 +382,12 @@ from influxdb_client import InfluxDBClient
 ```
 
 ### 🏠 **Multi-Room Support**
+
 ```javascript
 // Extend for multiple rooms
-const rooms = ['room1', 'room2', 'kitchen'];
-rooms.forEach(room => {
-    mqttClient.subscribe(`demo/${room}/+/+`);
+const rooms = ["room1", "room2", "kitchen"];
+rooms.forEach((room) => {
+  mqttClient.subscribe(`demo/${room}/+/+`);
 });
 ```
 
@@ -373,6 +396,7 @@ rooms.forEach(room => {
 ## 🎓 **Educational Resources**
 
 ### 📚 **Learning Objectives**
+
 - ✅ **IoT Architecture** design patterns
 - ✅ **MQTT Protocol** implementation
 - ✅ **Real-time Web Development** với WebSockets
@@ -380,11 +404,13 @@ rooms.forEach(room => {
 - ✅ **Embedded Programming** với ESP32
 
 ### 🧪 **Exercise Ideas**
+
 1. **Beginner:** Add new sensor types, modify UI styling
 2. **Intermediate:** Implement user authentication, create alerts
 3. **Advanced:** Deploy to cloud, add machine learning analytics
 
 ### 🔗 **Related Projects**
+
 - **[Home Assistant](https://www.home-assistant.io/)** - Open source automation
 - **[Node-RED](https://nodered.org/)** - Visual IoT programming
 - **[ThingsBoard](https://thingsboard.io/)** - IoT platform với dashboards
@@ -395,20 +421,36 @@ rooms.forEach(room => {
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
+### 🎉 **Credits & Attribution**
+
+#### **Original Work**
+This project is based on the original IoT demo system by **nguyentrungkiet**.
+- **Original Repository:** https://github.com/nguyentrungkiet/demo_chuong4_3_1
+- **Original Author:** Nguyễn Trung Kiệt
+
+#### **Improvements by EurusDFIR**
+- ✅ ESP32-C3 hardware support with real DHT11 sensors
+- ✅ SQLite database logging system
+- ✅ Discord temperature alert notifications
+- ✅ Multi-network configuration support
+- ✅ Comprehensive documentation and setup guides
+- ✅ Hardware-focused quick start guide
+
 ### 🎉 **Acknowledgments**
 
 - **HiveMQ** - Free public MQTT broker
-- **Flutter Team** - Excellent mobile framework  
+- **Flutter Team** - Excellent mobile framework
 - **ESP32 Community** - Hardware support và examples
 - **MQTT.js** - JavaScript MQTT client library
 - **Thủ Dầu Một University (TDMU)** - Educational support
 
-**👨‍💻 Author:** EurusDFIR  
-- GitHub: [@EurusDFIR](https://github.com/EurusDFIR)  
-- Repository: https://github.com/EurusDFIR/iot_lab5_monitor  
-- Original work with significant improvements and bug fixes  
-**🏫 Institution:** Thủ Dầu Một University (TDMU)  
-**📅 Year:** 2025
+**👨‍💻 Author:** EurusDFIR (Enhanced Version)
+
+- GitHub: [@EurusDFIR](https://github.com/EurusDFIR)
+- Repository: https://github.com/EurusDFIR/iot_lab5_monitor
+- Enhanced version with hardware support and advanced features
+  **🏫 Institution:** Thủ Dầu Một University (TDMU)
+  **📅 Year:** 2025
 
 ---
 
