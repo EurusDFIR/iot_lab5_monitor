@@ -1,10 +1,10 @@
 # 📊 IoT Demo System - Validation Complete! ✅
 
-**👨‍💻 Author:** Nguyễn Trung Kiệt  
+**👨‍💻 Author:** EurusDFIR  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)
 
 ## 🎯 **COMPREHENSIVE PROJECT AUDIT REPORT**
-**Date:** January 27, 2025  
+**Date:** October 6, 2025  
 **Status:** ✅ **FULLY OPERATIONAL & SYNCHRONIZED**
 
 ---

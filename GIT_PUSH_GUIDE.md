@@ -111,4 +111,4 @@ demo/room1/sys/online      - Online status
 
 **Tác giả:** EurusDFIR  
 **Repository:** https://github.com/EurusDFIR/iot_lab5_monitor  
-**Dựa trên:** nguyentrungkiet/demo_chuong4_3_1 (đã sửa lỗi và cải tiến)
+**Email:** Liên hệ qua GitHub Issues

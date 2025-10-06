@@ -406,7 +406,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 **👨‍💻 Author:** EurusDFIR  
 - GitHub: [@EurusDFIR](https://github.com/EurusDFIR)  
 - Repository: https://github.com/EurusDFIR/iot_lab5_monitor  
-- Based on: nguyentrungkiet/demo_chuong4_3_1 (fixed bugs and improvements)  
+- Original work with significant improvements and bug fixes  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)  
 **📅 Year:** 2025
 
