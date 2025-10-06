@@ -11,7 +11,7 @@ import threading
 import requests
 
 # Configuration
-BROKER_HOST = "broker.hivemq.com"
+BROKER_HOST = "localhost"
 BROKER_PORT = 1883
 TOPIC_NAMESPACE = "demo/room1"
 WEB_DASHBOARD = "http://localhost:3000/index.html"
@@ -30,7 +30,7 @@ class IoTSystemTester:
             # Subscribe to all topics
             client.subscribe(f"{TOPIC_NAMESPACE}/device/state")
             client.subscribe(f"{TOPIC_NAMESPACE}/sys/online")
-            client.subscribe(f"{TOPIC_NAMESPACE}/sensor/data")
+            client.subscribe(f"{TOPIC_NAMESPACE}/sensor/state")
         else:
             print(f"❌ Test client connection failed: {rc}")
             
@@ -148,7 +148,7 @@ class IoTSystemTester:
         
         # Analyze message types
         device_states = [msg for msg in self.received_messages if 'device/state' in msg['topic']]
-        sensor_data = [msg for msg in self.received_messages if 'sensor/data' in msg['topic']]
+        sensor_data = [msg for msg in self.received_messages if 'sensor/state' in msg['topic']]
         online_status = [msg for msg in self.received_messages if 'sys/online' in msg['topic']]
         
         print(f"📊 Message breakdown:")

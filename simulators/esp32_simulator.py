@@ -11,8 +11,8 @@ import threading
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
-# Configuration
-MQTT_BROKER = "broker.hivemq.com"
+# Configuration - Using local Mosquitto broker in Docker
+MQTT_BROKER = "localhost"
 MQTT_PORT = 1883
 TOPIC_NS = "demo/room1"
 DEVICE_ID = "esp32_simulator"
@@ -37,7 +37,10 @@ def on_connect(client, userdata, flags, rc):
         client.subscribe(cmd_topic, qos=1)
         print(f"📡 Subscribed to: {cmd_topic}")
         
-        # Publish initial online status
+        # Clear any retained offline status first (publish without retain)
+        publish_online_status_clear()
+        
+        # Then publish online status (retained)
         publish_online_status(True)
         
         # Publish initial device state
@@ -161,6 +164,18 @@ def publish_online_status(online):
     else:
         print(f"❌ Failed to publish online status")
 
+def publish_online_status_clear():
+    """Clear retained online status by publishing empty payload"""
+    topic = f"{TOPIC_NS}/sys/online"
+    
+    # Publish empty payload to clear retained message
+    result = client.publish(topic, "", qos=1, retain=True)
+    
+    if result.rc == mqtt.MQTT_ERR_SUCCESS:
+        print("🧹 Cleared retained online status")
+    else:
+        print("❌ Failed to clear retained online status")
+
 def sensor_publisher():
     """Background thread to publish sensor data every 3 seconds"""
     while True:
@@ -169,10 +184,11 @@ def sensor_publisher():
         time.sleep(3)
 
 def heartbeat_publisher():
-    """Background thread to publish device state every 15 seconds"""
+    """Background thread to publish device state and online status every 15 seconds"""
     while True:
         if client.is_connected():
             publish_device_state()
+            publish_online_status(True)  # Publish online status periodically
         time.sleep(15)
 
 def main():

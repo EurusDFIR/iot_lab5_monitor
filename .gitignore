@@ -75,3 +75,19 @@ desktop.ini
 *.sys
 *.dll
 *.exe
+
+# Database files (exclude actual data)
+database/*.db
+database/*.db-journal
+database/*.sqlite
+database/*.sqlite3
+
+# Arduino/ESP32 build files
+firmware_esp32c3/esp32c3_iot_demo/build/
+firmware_esp32c3/.pio/
+firmware_esp32c3/.pioenvs/
+firmware_esp32c3/.piolibdeps/
+
+# Keep important folders
+!database/.gitkeep
+!alerts/.gitkeep
