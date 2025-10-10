@@ -39,7 +39,7 @@ const char *WIFI_SSID = "Yamate";       // TDMU WiFi (no password)
 const char *WIFI_PASSWORD = "kudasaii"; // Empty - no password
 
 // MQTT Broker Configuration
-const char *MQTT_HOST = "10.104.247.92"; // Your computer's IP on TDMU network
+const char *MQTT_HOST = " 10.75.79.92"; // Your computer's IP on TDMU network
 const int MQTT_PORT = 1883;
 const char *MQTT_USERNAME = ""; // Empty for no auth
 const char *MQTT_PASSWORD = ""; // Empty for no auth
@@ -53,7 +53,7 @@ const char *TOPIC_NS = "demo/room1"; // Match simulator and apps
 #define DHT_PIN 2      // DHT11 Data pin
 #define DHT_TYPE DHT11 // DHT11 sensor type
 
-#define LED_PIN 8 // Built-in LED (Light control)
+#define LED_PIN 21 // Built-in LED (Light control)
 
 // L298N Motor Driver pins
 #define MOTOR_IN1 6  // L298N IN1 (changed from 8 to avoid conflict)
@@ -457,8 +457,8 @@ void handleCommand(JsonDocument &doc)
 
 void setLight(bool state)
 {
-    // ESP32-C3 built-in LED is active-LOW (LOW = ON, HIGH = OFF)
-    digitalWrite(LED_PIN, state ? LOW : HIGH);
+    // External LED is active-HIGH (HIGH = ON, LOW = OFF)
+    digitalWrite(LED_PIN, state ? HIGH : LOW);
     lightState = state;
 }
 

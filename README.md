@@ -424,11 +424,14 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ### 🎉 **Credits & Attribution**
 
 #### **Original Work**
+
 This project is based on the original IoT demo system by **nguyentrungkiet**.
+
 - **Original Repository:** https://github.com/nguyentrungkiet/demo_chuong4_3_1
 - **Original Author:** Nguyễn Trung Kiệt
 
 #### **Improvements by EurusDFIR**
+
 - ✅ ESP32-C3 hardware support with real DHT11 sensors
 - ✅ SQLite database logging system
 - ✅ Discord temperature alert notifications

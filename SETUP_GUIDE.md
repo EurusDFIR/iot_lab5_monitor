@@ -7,12 +7,14 @@
 ## 📋 Yêu cầu hệ thống
 
 ### Phần mềm bắt buộc:
+
 - ✅ **Python 3.8+** (đã cài sẵn trên máy)
 - ✅ **Docker Desktop** (để chạy Mosquitto MQTT Broker)
 - ✅ **Arduino IDE 2.x** (để upload firmware lên ESP32)
 - ✅ **Git** (để clone project)
 
 ### Phần cứng bắt buộc:
+
 - ✅ **ESP32-C3 Super Mini** (hoặc tương đương)
 - ✅ **DHT11 Temperature & Humidity Sensor**
 - ✅ **LED** (hoặc dùng LED built-in trên ESP32)
@@ -39,11 +41,13 @@ pip install paho-mqtt requests
 ```
 
 **Kiểm tra đã cài:**
+
 ```bash
 pip list | findstr "paho-mqtt requests"
 ```
 
 Phải thấy:
+
 ```
 paho-mqtt          x.x.x
 requests           x.x.x
@@ -150,6 +154,7 @@ mosquitto version 2.0.x running
 ```
 
 ### ❌ KHÔNG được thấy:
+
 ```
 Starting in local only mode
 Unable to open config file
@@ -172,6 +177,7 @@ Unable to open config file
 ### 4.2. Cài thư viện Arduino
 
 Sketch → Include Library → Manage Libraries, tìm và cài:
+
 - **PubSubClient** (MQTT client)
 - **ArduinoJson** (version 7.x)
 - **DHT sensor library** (Adafruit)
@@ -179,23 +185,24 @@ Sketch → Include Library → Manage Libraries, tìm và cài:
 
 ### 4.3. Nối dây ESP32-C3
 
-| Component | ESP32-C3 Pin |
-|-----------|--------------|
-| DHT11 VCC | 3.3V         |
-| DHT11 DATA| GPIO2        |
-| DHT11 GND | GND          |
-| LED Anode (+) | GPIO8  |
+| Component       | ESP32-C3 Pin            |
+| --------------- | ----------------------- |
+| DHT11 VCC       | 3.3V                    |
+| DHT11 DATA      | GPIO2                   |
+| DHT11 GND       | GND                     |
+| LED Anode (+)   | GPIO8                   |
 | LED Cathode (-) | GND (qua điện trở 220Ω) |
-| Motor IN1 | GPIO6        |
-| Motor IN2 | GPIO7        |
-| Motor ENA | GPIO10       |
-| Motor GND | GND          |
+| Motor IN1       | GPIO6                   |
+| Motor IN2       | GPIO7                   |
+| Motor ENA       | GPIO10                  |
+| Motor GND       | GND                     |
 
 ### 4.4. Cấu hình và Upload Firmware
 
 1. Mở file: `firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino`
 
 2. **Sửa WiFi và MQTT (dòng 24-29):**
+
    ```cpp
    const char *WIFI_SSID = "YOUR_WIFI_NAME";        // Tên WiFi của bạn
    const char *WIFI_PASSWORD = "YOUR_WIFI_PASS";    // Mật khẩu WiFi
@@ -203,16 +210,19 @@ Sketch → Include Library → Manage Libraries, tìm và cài:
    ```
 
 3. **Lấy IP máy tính:**
+
    ```bash
    # Windows:
    ipconfig
-   
+
    # Linux/Mac:
    ifconfig
    ```
+
    Tìm **IPv4 Address** (ví dụ: `192.168.1.100`)
 
 4. **Upload firmware:**
+
    - Kết nối ESP32-C3 với máy tính
    - Tools → Board → **ESP32C3 Dev Module**
    - Tools → Port → Chọn COM port của ESP32
@@ -232,6 +242,7 @@ Sketch → Include Library → Manage Libraries, tìm và cài:
 **✅ Nếu thấy `✅ MQTT connected!` → ESP32 đã kết nối thành công!**
 
 **❌ Nếu thấy `❌ MQTT connection failed, rc=-4`:**
+
 - Kiểm tra IP trong code có đúng không
 - Chạy `docker logs mosquitto` phải thấy "Opening... port 1883"
 - ESP32 và máy tính phải cùng mạng WiFi
@@ -269,6 +280,7 @@ python -m http.server 3000
 - ✅ **Toggle Light/Fan:** Click để bật/tắt, ESP32 phản ứng ngay
 
 **❌ Nếu không kết nối được WebSocket:**
+
 - Chạy `docker logs mosquitto` phải thấy "Opening websockets... port 8083"
 - Kiểm tra firewall không chặn port 8083
 
@@ -284,6 +296,7 @@ python mqtt_logger.py
 ```
 
 Phải thấy:
+
 ```
 ✅ Connected to MQTT broker: localhost
 📊 Subscribed to demo/room1/#
@@ -310,6 +323,7 @@ python view_database.py all
 ### Cấu hình:
 
 Sửa file `alerts/temperature_alert.py` (dòng ~10):
+
 ```python
 DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL"
 TEMP_THRESHOLD = 30.0  # °C
@@ -323,6 +337,7 @@ python temperature_alert.py
 ```
 
 Phải thấy:
+
 ```
 ✅ Discord webhook test successful!
 ✅ Connected to MQTT broker: localhost
@@ -342,6 +357,7 @@ flutter run
 ```
 
 **Lưu ý:**
+
 - **Android Emulator:** Sửa IP thành `10.0.2.2` trong code
 - **Physical Device:** Sửa IP thành IP máy tính thật
 
@@ -377,6 +393,7 @@ Kiểm tra từng bước:
 **Nguyên nhân:** Chưa cài Python packages
 
 **Giải pháp:**
+
 ```bash
 pip install paho-mqtt requests
 ```
@@ -386,6 +403,7 @@ pip install paho-mqtt requests
 **Nguyên nhân:** Mosquitto không cho phép kết nối từ mạng ngoài
 
 **Giải pháp:**
+
 ```bash
 # 1. Kiểm tra logs
 docker logs mosquitto
@@ -409,6 +427,7 @@ docker restart mosquitto
 **Nguyên nhân:** Mosquitto chưa bật WebSocket port 8083
 
 **Giải pháp:**
+
 ```bash
 # Kiểm tra logs
 docker logs mosquitto
@@ -423,6 +442,7 @@ docker restart mosquitto
 **Nguyên nhân:** File cấu hình không tồn tại hoặc Docker không mount được
 
 **Giải pháp:**
+
 ```powershell
 # 1. Kiểm tra file tồn tại
 Get-Content "mosquitto\config\mosquitto.conf"
@@ -437,11 +457,13 @@ docker rm -f mosquitto
 ### ❌ Lỗi 5: DHT11 `Failed to read from DHT sensor`
 
 **Nguyên nhân:**
+
 - Nối dây sai
 - DHT11 hỏng
 - GPIO pin không đúng
 
 **Giải pháp:**
+
 1. Kiểm tra nối dây theo bảng ở BƯỚC 4.3
 2. DHT11 cần 1-2 giây warm-up sau power on
 3. Kiểm tra code `#define DHT_PIN 2` khớp với chân nối thật
@@ -449,11 +471,13 @@ docker rm -f mosquitto
 ### ❌ Lỗi 6: LED/Motor không hoạt động
 
 **Nguyên nhân:**
+
 - GPIO pins sai
 - Nối dây sai
 - Không có nguồn
 
 **Giải pháp:**
+
 1. Serial Monitor phải thấy: `📥 Command received [demo/room1/device/cmd]:`
 2. Nếu thấy command nhưng không phản ứng → Kiểm tra nối dây GPIO
 3. L298N cần nguồn 5V từ VIN của ESP32
@@ -463,6 +487,7 @@ docker rm -f mosquitto
 ## 📊 Thông tin hệ thống
 
 ### Cấu hình mạng:
+
 - **Mosquitto MQTT (TCP):** `0.0.0.0:1883` - Cho ESP32, Python, Flutter native
 - **Mosquitto WebSocket:** `0.0.0.0:8083` - Cho Web Dashboard
 - **ESP32 Hardware:** Kết nối đến IP máy tính (VD: `192.168.1.100:1883`)
@@ -471,12 +496,14 @@ docker rm -f mosquitto
 - **Flutter Physical Device:** IP máy tính thật
 
 ### MQTT Topics:
+
 - `demo/room1/sensor/state` - Dữ liệu cảm biến (temperature, humidity, rssi)
 - `demo/room1/device/state` - Trạng thái thiết bị (light, fan)
 - `demo/room1/device/cmd` - Lệnh điều khiển (toggle light/fan)
 - `demo/room1/sys/online` - Trạng thái online/offline
 
 ### Database Tables:
+
 - `sensor_data` - Lịch sử nhiệt độ, độ ẩm
 - `device_state` - Lịch sử trạng thái LED/Motor
 - `device_online` - Lịch sử kết nối

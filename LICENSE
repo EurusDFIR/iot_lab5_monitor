@@ -61,6 +61,7 @@ This project is a derivative work based on the original IoT demo system by nguye
 The original repository can be found at: https://github.com/nguyentrungkiet/demo_chuong4_3_1
 
 Significant improvements and modifications have been made by EurusDFIR, including:
+
 - Hardware ESP32-C3 support with real sensors
 - SQLite database logging system
 - Discord temperature alert notifications
