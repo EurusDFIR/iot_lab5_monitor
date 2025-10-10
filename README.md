@@ -67,7 +67,7 @@
 - ✅ **Connection recovery** và error handling
 
 ---
-
+<!-- Nguyễn Tuấn Việt -->
 ## 🏗️ **System Architecture**
 
 ### 📊 **Overall System Diagram**
