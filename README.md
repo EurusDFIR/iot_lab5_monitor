@@ -21,10 +21,10 @@
 ### 🌐 **Web Dashboard (Real-time Monitoring)**
 
 - ✅ **Beautiful modern UI** với gradient design
-- ✅ **Real-time sensor data** (Temperature, Humidity, Light)
-- ✅ **Device status monitoring** (Online/Offline, Signal strength)
-- ✅ **Device control interface** với visual feedback
-- ✅ **MQTT WebSocket connection** cho real-time updates
+- ✅ **Real-time sensor data** (Temperature, Humidity từ DHT11)
+- ✅ **Device status monitoring** (Online/Offline, WiFi Signal strength)
+- ✅ **Device control interface** (Toggle LED & Motor)
+- ✅ **MQTT WebSocket connection** (port 8083) cho real-time updates
 
 ### 📱 **Flutter Mobile App (Device Control)**
 
@@ -32,12 +32,28 @@
 - ✅ **Device control switches** (Light & Fan toggle)
 - ✅ **Real-time synchronization** với Web Dashboard
 - ✅ **Connection status indicators**
-- ✅ **Cross-platform** (Web, Android, iOS ready)
+- ✅ **Cross-platform** (Web, Android - tested, iOS ready)
 
-### 🤖 **ESP32 Device Support**
+### 🤖 **ESP32-C3 Hardware Support**
 
-- ✅ **ESP32-S3 firmware** có sẵn
-- ✅ **Python simulator** cho testing
+- ✅ **ESP32-C3 Super Mini** với DHT11 sensor
+- ✅ **External LED control** (GPIO21, Active-HIGH)
+- ✅ **L298N Motor driver** integration
+- ✅ **Arduino IDE compatible** firmware
+- ✅ **Multi-network WiFi** support (home/hotspot/TDMU)
+
+### 💾 **Database & Logging**
+
+- ✅ **SQLite database** logging tất cả dữ liệu sensor
+- ✅ **MQTT to Database** logger real-time
+- ✅ **Historical data** viewer và analytics
+- ✅ **Command history** tracking
+
+### 🔔 **Alert System**
+
+- ✅ **Discord temperature alerts** khi nhiệt độ > 30°C
+- ✅ **Webhook notifications** real-time
+- ✅ **Configurable thresholds**
 - ✅ **MQTT communication** với broker
 - ✅ **Sensor integration** (DHT22, BH1750, etc.)
 - ✅ **Device control** (Relays, LEDs)
@@ -95,7 +111,7 @@ graph TB
 ### 🗂️ **Project Structure**
 
 ```
-📦 IoT Demo System (chapter4_3_1)
+📦 IoT Lab 5 Monitor (iot_lab5_monitor)
 ├── 📱 app_flutter/                # Flutter Mobile Application
 │   ├── lib/
 │   │   ├── main.dart             # Main app with Material Design 3
@@ -103,6 +119,8 @@ graph TB
 │   │   ├── main_mqtt_web.dart    # Web-specific MQTT client
 │   │   └── main_simple.dart      # Simplified version
 │   ├── build/web/                # Built web version
+│   ├── android/                  # Android platform config
+│   ├── windows/                  # Windows platform config
 │   ├── web/                      # Web platform config
 │   └── pubspec.yaml              # Flutter dependencies
 │
@@ -110,14 +128,33 @@ graph TB
 │   └── src/
 │       └── index.html            # Main dashboard with MQTT WebSocket
 │
-├── 🤖 firmware_esp32s3/          # ESP32 Hardware Code
+├── 🤖 firmware_esp32c3/          # ESP32-C3 Hardware Code (MAIN)
+│   ├── esp32c3_iot_demo/
+│   │   └── esp32c3_iot_demo.ino  # Arduino sketch for ESP32-C3
 │   ├── src/
-│   │   └── main.cpp              # Arduino C++ firmware
+│   │   └── main.cpp              # PlatformIO version
+│   ├── platformio.ini            # PlatformIO config
+│   ├── ARDUINO_SETUP.md          # Arduino IDE setup guide
 │   └── README.md                 # Hardware setup guide
+│
+├── 🤖 firmware_esp32s3/          # ESP32-S3 Reference Code
+│   ├── src/
+│   │   └── main.cpp              # Alternative ESP32-S3 firmware
+│   └── README.md                 # S3 setup guide
 │
 ├── 🐍 simulators/                # Device Simulators
 │   ├── esp32_simulator.py        # ESP32 device simulator
 │   └── flutter_simulator.py      # Flutter testing simulator
+│
+├── 💾 database/                  # SQLite Database Logging
+│   ├── iot_data.db               # SQLite database file
+│   ├── mqtt_logger.py            # MQTT to database logger
+│   ├── view_database.py          # Database viewer utility
+│   └── README.md                 # Database documentation
+│
+├── 🔔 alerts/                    # Alert System
+│   ├── temperature_alert.py      # Discord temperature alerts
+│   └── README.md                 # Alert setup guide
 │
 ├── 🧪 tests/                     # Testing & Validation
 │   ├── comprehensive_test.py     # Full system validation
@@ -125,27 +162,31 @@ graph TB
 │   └── test_mqtt_command.py      # MQTT message validation
 │
 ├── 🔧 scripts/                   # Automation Scripts
-│   ├── run_all.bat              # One-click system launcher
-│   ├── build_flutter.bat        # Flutter build automation
-│   ├── check_status.bat         # System health check
-│   ├── final_validation.bat     # Complete validation
-│   └── open_interfaces.bat      # Quick access to URLs
+│   ├── run_all.bat               # One-click system launcher
+│   ├── run_all.ps1               # PowerShell launcher
+│   ├── build_flutter.bat         # Flutter build automation
+│   ├── check_status.bat          # System health check
+│   ├── final_validation.bat      # Complete validation
+│   └── open_interfaces.bat       # Quick access to URLs
 │
 ├── 🏗️ infra/                    # Infrastructure Config
-│   ├── mosquitto.conf           # Local MQTT broker config
-│   └── README.md                # Infrastructure setup guide
+│   ├── mosquitto.conf            # Mosquitto MQTT broker config
+│   └── README.md                 # Infrastructure setup guide
 │
 ├── 📚 docs/                      # Documentation
-│   ├── COPILOT_BRIEF.md         # Development specifications
-│   └── VALIDATION_REPORT.md     # Testing results & metrics
+│   ├── COPILOT_BRIEF.md          # Development specifications
+│   └── VALIDATION_REPORT.md      # Testing results & metrics
 │
 ├── ⚙️ Configuration              # Config Files
-│   ├── .env                     # Local environment variables
-│   ├── .env.example             # Environment template
-│   └── .gitignore               # Git ignore rules
+│   ├── .env.example              # Environment template
+│   └── .gitignore                # Git ignore rules
 │
 └── 📄 Project Root               # Root Level Files
     ├── README.md                 # This comprehensive guide
+    ├── QUICK_RUN.md              # Quick start for hardware
+    ├── QUICK_START.md            # Quick start guide
+    ├── SETUP_GUIDE.md            # Complete setup instructions
+    ├── GIT_PUSH_GUIDE.md         # Git workflow guide
     └── LICENSE                   # MIT License
 ```
 
@@ -154,45 +195,58 @@ graph TB
 ```
 📡 demo/room1/
 ├── 📊 sensor/
-│   └── data                  # {"temp": 25.5, "humidity": 60, "light": 850}
+│   └── state                 # {"temp": 30.0, "hum": 57.0, "rssi": -74}
 ├── 🔌 device/
-│   ├── state                 # {"led": "ON", "fan": "OFF", "signal": -45}
-│   └── cmd                   # {"device": "led", "action": "toggle"}
+│   ├── state                 # {"light": true, "fan": false}
+│   └── cmd                   # {"light": "toggle"} or {"fan": "on"}
 └── 🟢 sys/
-    └── online                # {"status": "connected", "uptime": 1234}
+    └── online                # {"status": "online", "uptime": 1234}
 ```
 
 ---
 
 ## 🚀 **Quick Start**
 
-### ⚡ **One-Click Launch**
+### ⚡ **Hardware Required**
+
+- **ESP32-C3 Super Mini** với DHT11 sensor
+- **Mosquitto MQTT Broker** (Docker)
+- Xem chi tiết: [QUICK_RUN.md](QUICK_RUN.md)
+
+### 🔧 **Setup Steps**
 
 ```bash
-# Navigate to project directory
-cd d:\SourceCode\chapter4_3_1
+# 1. Clone repository
+git clone https://github.com/EurusDFIR/iot_lab5_monitor.git
+cd iot_lab5_monitor
 
-# Launch entire system
-.\scripts\run_all.bat
+# 2. Install Python dependencies
+pip install paho-mqtt requests
+
+# 3. Start Mosquitto broker
+docker run -d --name mosquitto -p 1883:1883 -p 8083:8083 eclipse-mosquitto
+
+# 4. Upload firmware to ESP32-C3 (Arduino IDE)
+# - Open firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino
+# - Configure WiFi and MQTT broker IP
+# - Upload to ESP32-C3
+
+# 5. Open Web Dashboard
+cd web/src
+python -m http.server 3000
+# Open: http://localhost:3000
 ```
 
 **🌐 Access URLs:**
 
-- **Web Dashboard:** http://localhost:3000/index.html
-- **Flutter App:** http://localhost:8080/index.html
+- **Web Dashboard:** http://localhost:3000
+- **Flutter App:** `flutter run` trong app_flutter/
 
-### 🧪 **Test System**
+**📖 Detailed Guides:**
 
-```bash
-# Run comprehensive test
-python tests/comprehensive_test.py
-
-# Check system status
-.\scripts\check_status.bat
-
-# Final validation
-.\scripts\final_validation.bat
-```
+- [SETUP_GUIDE.md](SETUP_GUIDE.md) - Complete step-by-step setup
+- [QUICK_RUN.md](QUICK_RUN.md) - Quick start for hardware
+- [firmware_esp32c3/ARDUINO_SETUP.md](firmware_esp32c3/ARDUINO_SETUP.md) - Arduino IDE setup
 
 ---
 
@@ -258,52 +312,92 @@ cd app_flutter/build/web && python -m http.server 8080
 
 ## 🔧 **Hardware Setup**
 
-### 🤖 **ESP32-S3 Wiring Diagram**
+### 🤖 **ESP32-C3 Super Mini Wiring**
 
 ```
-ESP32-S3 Pinout:
-├── 📡 DHT22 Sensor
+ESP32-C3 Super Mini Pinout:
+├── 📡 DHT11 Sensor
 │   ├── VCC → 3.3V
 │   ├── GND → GND
-│   └── Data → GPIO 4
+│   └── Data → GPIO 2
 │
-├── 💡 LED Control
-│   ├── LED+ → GPIO 2
+├── 💡 LED Control (External LED on GPIO21)
+│   ├── LED+ → GPIO 21
 │   └── LED- → GND (through 220Ω resistor)
+│   Note: Built-in LED on GPIO8 (Active-LOW)
 │
-├── 🌟 Fan Relay
-│   ├── VCC → 5V
-│   ├── GND → GND
-│   ├── IN → GPIO 5
-│   └── COM/NO → Fan power circuit
+├── 🌟 L298N Motor Driver
+│   ├── VCC → 5V (External power)
+│   ├── GND → Common GND
+│   ├── IN1 → GPIO 6
+│   ├── IN2 → GPIO 7
+│   └── ENA → GPIO 10 (PWM control)
 │
 └── 🔌 Power Supply
-    ├── 5V → ESP32 VIN
-    └── GND → ESP32 GND
+    ├── 5V → ESP32 VIN (from USB or external)
+    └── GND → Common GND
 ```
 
 ### ⚙️ **Configuration Steps**
 
-1. **WiFi Setup:** Update `firmware_esp32s3/src/main.cpp`
+1. **WiFi Setup:** Update `firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino`
 
 ```cpp
-const char* ssid = "Your_WiFi_Name";
-const char* password = "Your_WiFi_Password";
+const char *WIFI_SSID = "Your_WiFi_Name";
+const char *WIFI_PASSWORD = "Your_WiFi_Password";
 ```
 
-2. **MQTT Broker:** Default uses HiveMQ public broker
+2. **MQTT Broker:** Configure your computer's IP address
 
 ```cpp
-const char* mqtt_server = "broker.hivemq.com";
-const int mqtt_port = 1883;
+const char *MQTT_HOST = "192.168.1.xxx";  // Your computer's IP
+const int MQTT_PORT = 1883;
 ```
 
-3. **Upload Firmware:** Using Arduino IDE or PlatformIO
+3. **Upload Firmware:** Using Arduino IDE
 
 ```bash
-# Arduino IDE: Tools → Board → ESP32 → ESP32S3 Dev Module
-# Upload firmware to device
+# Arduino IDE Setup:
+# - Install ESP32 board support
+# - Select: Tools → Board → ESP32C3 Dev Module
+# - Select correct COM port
+# - Click Upload button
 ```
+
+**📖 Detailed Setup:** See [firmware_esp32c3/ARDUINO_SETUP.md](firmware_esp32c3/ARDUINO_SETUP.md)
+
+---
+
+## 💾 **Database & Alerts**
+
+### 📊 **SQLite Database Logging**
+
+```bash
+# Start database logger
+cd database
+python mqtt_logger.py
+
+# View stored data
+python view_database.py all
+```
+
+**Tables:**
+- `sensor_data` - Temperature, humidity, RSSI logs
+- `device_state` - LED and fan state history
+- `device_online` - Connection status logs
+- `commands` - Command history
+
+### 🔔 **Discord Temperature Alerts**
+
+```bash
+# Configure Discord webhook
+# Edit alerts/temperature_alert.py with your webhook URL
+
+cd alerts
+python temperature_alert.py
+```
+
+Sends alert when temperature exceeds 30°C threshold.
 
 ---
 

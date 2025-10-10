@@ -34,6 +34,16 @@ docker run -d \
 
 ### Chạy các thành phần
 
+**ESP32-C3 Real Hardware (khuyên dùng):**
+
+```bash
+# 1. Mở Arduino IDE
+# 2. Load file: firmware_esp32c3/esp32c3_iot_demo/esp32c3_iot_demo.ino
+# 3. Cấu hình WiFi và MQTT broker IP trong code
+# 4. Upload lên ESP32-C3
+# Xem chi tiết: firmware_esp32c3/ARDUINO_SETUP.md
+```
+
 **ESP32 Simulator (nếu không có hardware):**
 
 ```bash
@@ -48,14 +58,17 @@ python -m http.server 3000
 # Mở: http://localhost:3000
 ```
 
-**Database Logger:**
+**Database Logger (Optional):**
 
 ```bash
 cd database
 python mqtt_logger.py
+
+# Xem dữ liệu đã lưu:
+python view_database.py all
 ```
 
-**Temperature Alert (Discord):**
+**Temperature Alert (Optional - Discord):**
 
 ```bash
 # 1. Tạo Discord webhook riêng
@@ -64,43 +77,53 @@ cd alerts
 python temperature_alert.py
 ```
 
-**Flutter App:**
+**Flutter App (Optional):**
 
 ```bash
 cd app_flutter
 flutter pub get
 flutter run
+# Lưu ý: Emulator dùng IP 10.0.2.2, physical device dùng IP thật
 ```
 
 ---
 
-## � Thông tin hệ thống
+## 🔧 Thông tin hệ thống
 
-### Hardware ESP32-C3
+### Hardware ESP32-C3 Super Mini
 
 ```
-- DHT11: GPIO 2
-- LED: GPIO 8 (Active-LOW)
+- DHT11: GPIO 2 (Temperature & Humidity sensor)
+- LED Built-in: GPIO 8 (Active-LOW - for testing)
+- LED External: GPIO 21 (Active-HIGH - main LED)
 - Motor IN1: GPIO 6
 - Motor IN2: GPIO 7
-- Motor ENA: GPIO 10 (PWM)
+- Motor ENA: GPIO 10 (PWM control)
+```
+
+### MQTT Broker Configuration
+
+```
+- TCP Port: 1883 (ESP32, Database, Alerts)
+- WebSocket Port: 8083 (Web Dashboard)
+- Host: localhost or your_computer_ip
 ```
 
 ### MQTT Topics
 
 ```
-demo/room1/sensor/state    - Sensor data
-demo/room1/device/state    - Device state
-demo/room1/device/cmd      - Commands
-demo/room1/sys/online      - Online status
+demo/room1/sensor/state    - {"temp": 30.0, "hum": 57.0, "rssi": -74}
+demo/room1/device/state    - {"light": true, "fan": false}
+demo/room1/device/cmd      - {"light": "toggle"} or {"fan": "on"}
+demo/room1/sys/online      - {"status": "online", "uptime": 1234}
 ```
 
-### Database Tables
+### Database Tables (SQLite)
 
-- sensor_data: Temperature, humidity, RSSI
-- device_state: LED, fan status
-- device_online: Connection status
-- commands: Command history
+- **sensor_data**: Temperature, humidity, RSSI logs
+- **device_state**: LED and fan state history
+- **device_online**: Connection status logs
+- **commands**: Command history with timestamps
 
 ---
 
