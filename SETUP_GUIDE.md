@@ -550,6 +550,7 @@ docker rm -f mosquitto
 ## 📄 License & Credits
 
 **Development Team:**
+
 - Lê Văn Hoàng
 - Nguyễn Tuấn Việt
 - Diệp Đại Lê Hoài

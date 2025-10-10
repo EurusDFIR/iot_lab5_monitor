@@ -426,6 +426,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 #### **Development Team**
 
 This project was developed by:
+
 - **Lê Văn Hoàng**
 - **Nguyễn Tuấn Việt**
 - **Diệp Đại Lê Hoài**
