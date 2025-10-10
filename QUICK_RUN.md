@@ -157,9 +157,10 @@ flutter run
 
 ## 📄 Credits & License
 
-**Original Work:** Based on nguyentrungkiet's IoT demo system  
-**Original Repository:** https://github.com/nguyentrungkiet/demo_chuong4_3_1  
-**Enhanced by:** EurusDFIR with hardware support and advanced features
+**Development Team:**
+- Lê Văn Hoàng
+- Nguyễn Tuấn Việt
+- Diệp Đại Lê Hoài
 
 **License:** MIT License - See [LICENSE](LICENSE) for details
 

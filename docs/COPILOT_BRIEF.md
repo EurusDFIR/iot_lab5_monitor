@@ -1,6 +1,6 @@
 # COPILOT_BRIEF.md - IoT Demo System ✅ COMPLETED
 
-**👨‍💻 Author:** EurusDFIR  
+**👨‍💻 Authors:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)  
 **📅 Year:** 2025
 

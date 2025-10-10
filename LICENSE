@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2025 EurusDFIR - Thủ Dầu Một University (TDMU)
+Copyright (c) 2025 Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài - Thủ Dầu Một University (TDMU)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -57,10 +57,10 @@ This project uses the following open-source libraries:
 
 ## Original Work Attribution
 
-This project is a derivative work based on the original IoT demo system by nguyentrungkiet.
-The original repository can be found at: https://github.com/nguyentrungkiet/demo_chuong4_3_1
+This project is a derivative work based on the original IoT demo system.
+Original development and enhancements by: Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài
 
-Significant improvements and modifications have been made by EurusDFIR, including:
+Significant features and modifications include:
 
 - Hardware ESP32-C3 support with real sensors
 - SQLite database logging system
@@ -82,7 +82,7 @@ Special thanks to:
 - **Thủ Dầu Một University (TDMU)** for educational support and resources
 - **Open Source Contributors** who made this project possible
 
-**Author:** EurusDFIR  
+**Authors:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài  
 **Institution:** Thủ Dầu Một University (TDMU)  
 **Project:** IoT Demo System for Educational and Research Purposes  
 **Year:** 2025

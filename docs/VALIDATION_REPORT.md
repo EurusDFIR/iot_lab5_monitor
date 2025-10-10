@@ -1,6 +1,6 @@
 # 📊 IoT Demo System - Validation Complete! ✅
 
-**👨‍💻 Author:** EurusDFIR  
+**👨‍💻 Authors:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)
 
 ## 🎯 **COMPREHENSIVE PROJECT AUDIT REPORT**

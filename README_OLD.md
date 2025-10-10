@@ -1397,7 +1397,7 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **MQTT.js** - JavaScript MQTT client library
 - **Thủ Dầu Một University (TDMU)** - Educational support
 
-**👨‍💻 Author:** Nguyễn Trung Kiệt  
+**👨‍💻 Authors:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài  
 **🏫 Institution:** Thủ Dầu Một University (TDMU)  
 **📅 Year:** 2025
 

@@ -423,14 +423,14 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ### 🎉 **Credits & Attribution**
 
-#### **Original Work**
+#### **Development Team**
 
-This project is based on the original IoT demo system by **nguyentrungkiet**.
+This project was developed by:
+- **Lê Văn Hoàng**
+- **Nguyễn Tuấn Việt**
+- **Diệp Đại Lê Hoài**
 
-- **Original Repository:** https://github.com/nguyentrungkiet/demo_chuong4_3_1
-- **Original Author:** Nguyễn Trung Kiệt
-
-#### **Improvements by EurusDFIR**
+#### **Key Features**
 
 - ✅ ESP32-C3 hardware support with real DHT11 sensors
 - ✅ SQLite database logging system
@@ -447,11 +447,10 @@ This project is based on the original IoT demo system by **nguyentrungkiet**.
 - **MQTT.js** - JavaScript MQTT client library
 - **Thủ Dầu Một University (TDMU)** - Educational support
 
-**👨‍💻 Author:** EurusDFIR (Enhanced Version)
+**👨‍💻 Authors:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài
 
-- GitHub: [@EurusDFIR](https://github.com/EurusDFIR)
 - Repository: https://github.com/EurusDFIR/iot_lab5_monitor
-- Enhanced version with hardware support and advanced features
+- Complete IoT system with hardware support and advanced features
   **🏫 Institution:** Thủ Dầu Một University (TDMU)
   **📅 Year:** 2025
 

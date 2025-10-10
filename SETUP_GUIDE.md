@@ -549,9 +549,12 @@ docker rm -f mosquitto
 
 ## 📄 License & Credits
 
-**Original Work:** Based on nguyentrungkiet's IoT demo system  
-**Original Repository:** https://github.com/nguyentrungkiet/demo_chuong4_3_1  
-**Enhanced by:** EurusDFIR with hardware support, database, alerts, bug fixes
+**Development Team:**
+- Lê Văn Hoàng
+- Nguyễn Tuấn Việt
+- Diệp Đại Lê Hoài
+
+**Institution:** Thủ Dầu Một University (TDMU)
 
 **License:** MIT License - See [LICENSE](LICENSE)
 

@@ -120,7 +120,7 @@ demo/room1/sys/online      - Online status
 
 ## 📞 Liên hệ
 
-**Tác giả:** EurusDFIR (Enhanced Version)  
+**Tác giả:** Lê Văn Hoàng, Nguyễn Tuấn Việt, Diệp Đại Lê Hoài  
 **Repository:** https://github.com/EurusDFIR/iot_lab5_monitor  
-**Original Work:** Based on nguyentrungkiet/demo_chuong4_3_1  
+**Institution:** Thủ Dầu Một University (TDMU)  
 **Email:** Liên hệ qua GitHub Issues
