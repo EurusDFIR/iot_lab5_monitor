@@ -4,9 +4,9 @@
 
 ![IoT Demo System](https://img.shields.io/badge/IoT-Demo_System-blue.svg)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-green.svg)
-![Flutter](https://img.shields.io/badge/Flutter-Web-blue.svg)
-![MQTT](https://img.shields.io/badge/MQTT-Synchronized-orange.svg)
-![ESP32](https://img.shields.io/badge/ESP32-S3_Compatible-red.svg)
+![Flutter](https://img.shields.io/badge/Flutter-Mobile_App-blue.svg)
+![MQTT](https://img.shields.io/badge/MQTT-Mosquitto-orange.svg)
+![ESP32](https://img.shields.io/badge/ESP32-C3_Super_Mini-red.svg)
 
 **Hệ thống IoT Demo hoàn chỉnh với Web Dashboard, Flutter Mobile App và ESP32 Device**
 
@@ -81,14 +81,14 @@ graph TB
         end
 
         subgraph "☁️ Communication Layer"
-            BROKER[🔌 MQTT Broker<br/>HiveMQ Public<br/>broker.hivemq.com]
-            WS1[WebSocket :8884]
-            WS2[WebSocket :8884]
+            BROKER[🔌 MQTT Broker<br/>Mosquitto Local<br/>localhost:1883/8083]
+            WS1[WebSocket :8083]
+            WS2[WebSocket :8083]
             TCP[TCP :1883]
         end
 
         subgraph "🔧 Device Layer"
-            ESP[🤖 ESP32-S3<br/>Real Hardware<br/>Sensors + Relays]
+            ESP[🤖 ESP32-C3 Super Mini<br/>Real Hardware<br/>DHT11 + LED + Motor]
             SIM[🐍 Python Simulator<br/>Development Testing<br/>Mock Device]
         end
     end
@@ -414,14 +414,18 @@ Sends alert when temperature exceeds 30°C threshold.
 ### 📊 **Health Checks**
 
 ```bash
-# System status
-.\scripts\check_status.bat
+# Check Mosquitto broker
+docker ps | findstr mosquitto
+docker logs mosquitto
 
-# Network connectivity
-ping broker.hivemq.com
+# Check MQTT connectivity
+mosquitto_sub -h localhost -t "demo/room1/#" -v
 
 # Port availability
-netstat -an | findstr ":3000\|:8080\|:1883"
+netstat -an | findstr ":3000\|:1883\|:8083"
+
+# ESP32 Serial Monitor
+# Open Arduino IDE → Tools → Serial Monitor (115200 baud)
 ```
 
 ---
